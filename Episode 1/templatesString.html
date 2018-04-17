@@ -11,17 +11,15 @@
 <p>Open the console</p>
 <script type="text/babel">
     // Function
-    var lordify = function(firstName, land) {
-      if (!firstName) {
-        throw new Error('A firstName is required to lordify')
+    var tahoe = {
+      resorts: ["Kirkwood","Squaw","Alpine","Heavenly","Northstar"],
+      print: function (delay=1000) {
+        setTimeout(() =>{
+          console.log(this ===window)
+        }, delay)
       }
-      if (!land) {
-        throw new Error('A lord must have a land')
-      }
-      return `${firstName} of ${land}`
     }
-    console.log( lordify("Kelly", "Sonoma") )
-    console.log( lordify("Georgi", "Bulgaria") )
+    tahoe.print()
 </script>
 </body>
 </html>
