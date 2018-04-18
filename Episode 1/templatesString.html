@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,17 @@
 <h1>Spread Operator</h1>
 <p>Open the console</p>
 <script type="text/babel">
-    // Spread Operator
-    var peaks = ["Tallac", "Ralston", "Rose"]
-    var canyons = ["Ward", "Blackwood"]
-    var tahoe = [peaks, ...canyons]
-    console.log(tahoe.join(', '))
+    // Spread operator works with objects too
+    var morning = {
+      breakfast: "oatmeal",
+      lunch: "peanut butter and jelly"
+    }
+    var dinner = "mac and cheese"
+    var backpackingMeals = {
+      ...morning,
+      dinner
+    }
+    console.log(morning)
 </script>
 </body>
 </html>
