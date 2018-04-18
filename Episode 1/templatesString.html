@@ -10,19 +10,9 @@
 <h1>Destructuring</h1>
 <p>Open the console</p>
 <script type="text/babel">
-    // Destructuring Assignment
-    var sandwich =  {
-      bread: "dutch crunch",
-      meat: "tuna",
-      cheese: "swiss",
-      toppings: ["lettuce", "tomato", "mustard"]
-    }
-    var {bread, meat} = sandwich
-    console.log(bread, meat)
-    bread = "garlic"
-    meat = "turkey"
-    console.log(bread,meat)
-    console.log(sandwich.bread, sandwich.meat)
+    // Destructuring Arrays
+    var [firstResort,,] = ["Kirkwood", "Squaw", "Alpine"]
+    console.log(firstResort) 
 </script>
 </body>
 </html>
