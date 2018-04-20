@@ -11,11 +11,13 @@
 <p>Open the Console</p>
 <script type="text/babel">
     const schools = [
-        "Yorktown",
-        "Washington & Lee",
-        "Wakefield"
+      "Yorktown",
+      "Washington & Lee",
+      "Wakefield"
     ]
-    console.log( schools.join(','))
+    const highSchools = schools.map(school => `${school} High School`)
+    console.log(highSchools.join("\n"))
+    console.log(schools.join("\n"))
 </script>
 </body>
 </html>
