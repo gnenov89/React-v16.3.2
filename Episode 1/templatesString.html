@@ -15,13 +15,15 @@
       canRead: false,
       canWrite: false
     }
-    const selfEducate = person => {
-      person.canRead = true
-      person.canWrite = true
-      return person
-    }
+    const selfEducate = person =>
+        ({
+            ...person,
+            canRead: true,
+            canWrite: true
+        })
     //
-    // still impure, mutates the original object
+    // Pure Function, takes an argument, returns an object,
+    //    and causes zero side effects
     //
     console.log( selfEducate(frederick) )
     console.log( frederick )
