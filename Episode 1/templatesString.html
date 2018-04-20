@@ -4,29 +4,19 @@
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
     <title>Pure Functions</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
 <h1>Pure Functions</h1>
-<p>Open the console</p>
+<div id="react-container"></div>
 <script type="text/babel">
-    var frederick = {
-      name: "Frederick Douglass",
-      canRead: false,
-      canWrite: false
-    }
-    const selfEducate = person =>
-        ({
-            ...person,
-            canRead: true,
-            canWrite: true
-        })
-    //
-    // Pure Function, takes an argument, returns an object,
-    //    and causes zero side effects
-    //
-    console.log( selfEducate(frederick) )
-    console.log( frederick )
+    const Header = (props) => <h1>{props.title}</h1>
+    ReactDOM.render(
+        <Header title="React uses pure functions" />,
+        document.getElementById('react-container')
+    )
 </script>
 </body>
 </html>
