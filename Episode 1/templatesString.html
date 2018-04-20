@@ -3,32 +3,28 @@
 <head>
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
-    <title>Immutability</title>
+    <title>Pure Functions</title>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
-<h1>Immutability</h1>
+<h1>Pure Functions</h1>
 <p>Open the console</p>
 <script type="text/babel">
-    let list = [
-        { title: "Rad Red"},
-        { title: "Lawn"},
-        { title: "Party Pink"}
-    ]
-
-    let adds =[
-        {title:"some"},
-        {title:"another"}
-    ]
-    var addColor = function(title, colors) {
-      colors.push({ title: title })
-      return colors
+    var frederick = {
+      name: "Frederick Douglass",
+      canRead: false,
+      canWrite: false
+    }
+    function selfEducate() {
+      frederick.canRead = true
+      frederick.canWrite = true
     }
     //
-    // Add Color is mutating the original list
+    // Impure function, no arguments, no returns,
+    //   and it mutates the original object
     //
-    console.log(addColor("Glam Green",  adds)[2])
-    console.log(list.length)
+    selfEducate()
+    console.log( frederick )
 </script>
 </body>
 </html>
