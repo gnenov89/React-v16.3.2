@@ -3,21 +3,31 @@
 <head>
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
-    <title>Transforming Data</title>
+    <title>Literal Enhancements</title>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
-<h1>Transforming Data</h1>
-<p>Open the Console</p>
+<h1>Literal Enhancements</h1>
+<p>Open the console</p>
 <script type="text/babel">
-    const ages = [21,18,42,40,64,63,34];
-    // less syntax
-    const max = ages.reduce(
-        (max, value) => (value > max) ? value : max,
-        
-    )
-    console.log('max', max)
-    
+    // Object literal enhancements
+    var name = "Julia Mancuso"
+    var sound = "go fast"
+    const skier = {
+      name,
+      sound,
+      powderYell() {
+        let yell = this.sound.toUpperCase()
+        console.log(`${yell} ${yell} ${yell}!!!`)
+      },
+      speed(mph) {
+        this.speed = mph
+        console.log('speed:', mph)
+      }
+    }
+    skier.powderYell()
+    skier.speed(350)
+    console.log(JSON.stringify(skier))
 </script>
 </body>
 </html>
