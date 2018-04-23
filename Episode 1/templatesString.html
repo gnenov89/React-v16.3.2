@@ -10,11 +10,14 @@
 <h1>Transforming Data</h1>
 <p>Open the Console</p>
 <script type="text/babel">
-   var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
-
-const result = words.filter(word => word.length > 6);
-
-console.log(result)
+    const schools = [
+      "Yorktown",
+      "Washington & Lee",
+      "Wakefield"
+    ]
+    const highSchools = schools.map(school => `${school} High School`)
+    console.log(highSchools.join("\n"))
+    console.log(schools.join("\n"))
 </script>
 </body>
 </html>
