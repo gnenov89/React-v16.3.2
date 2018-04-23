@@ -10,20 +10,13 @@
 <h1>Transforming Data</h1>
 <p>Open the Console</p>
 <script type="text/babel">
-
-   const array1 = [1, 2, 3, 4];
-
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-// 1 + 2 + 3 + 4
-console.log(array1.reduce(reducer));
-// expected output: 10
-
-// 5 + 1 + 2 + 3 + 4
-console.log(array1.reduce(reducer, 1));
-// expected output: 15
-
-  
+    const ages = [21,18,42,40,64,63,34];
+    // less syntax
+    const max = ages.reduce(
+        (max, value) => (value > max) ? value : max,
+        0
+    )
+    console.log('max', max)
 </script>
 </body>
 </html>
