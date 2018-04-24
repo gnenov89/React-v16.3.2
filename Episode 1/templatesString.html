@@ -9,63 +9,86 @@
     <h1>Imperative Clock</h1>
     <p>Open the console to check the time.</p>
     <script>
-        // Lock clcok tie every second 
+      
 
-        setInterval(logClockTime, 100);
+const oneSecond = () => 1000
+const getCurrentTime = () => new Date()
+const clear = () => console.clear()
+const log = message => console.log(message)
 
+const abstractClockTime = date =>
+    ({
+        hours: date.getHours(),
+        minutes: date.getMinutes(),
+        seconds: date.getSeconds()
+    })
 
-        function logClockTime () {
+const civilianHours = clockTime =>
+    ({
+        ...clockTime,
+        hours: (clockTime.hours > 12) ?
+        clockTime.hours - 12 :
+            clockTime.hours
+    })
 
-//  Set time as civilian time  
-var time = getClockTime();
+const appendAMPM = clockTime =>
+    ({
+        ...clockTime,
+        ampm: (clockTime.hours >= 12) ? "PM" : "AM"
+    })
 
-// clear the console and log the time in the conosle 
-console.clear();
-console.log(time);
-}
-function getClockTime() {
+const display = target => time => target(time)
 
-var date = new Date();
-var time= "";
+const formatClock = format =>
+    time =>
+        format.replace("hh", time.hours)
+            .replace("mm", time.minutes)
+            .replace("ss", time.seconds)
+            .replace("tt", time.ampm)
 
-// Searilie clock time 
-var time = {
-    hours : date.getHours(),
-    minutes:date.getMinutes(),
-    seconds:date.getSeconds(),
-    ampm: "AM"
-}
+const prependZero = key => clockTime =>
+    ({
+        ...clockTime,
+        [key]: (clockTime[key] < 10) ?
+        "0" + clockTime[key] :
+            clockTime[key]
+    })
 
-// Convert to civilian time  
-if (time.hours=12) {
-    time.ampm = "PM";
-}else if(time.hours >12){
-    time.ampm ="PM";
-    time.hours -=12;
+const compose = (...fns) =>
+    (arg) =>
+        fns.reduce(
+            (composed, f) => f(composed),
+            arg
+        )
 
-}
+const convertToCivilianTime = clockTime =>
+    compose(
+        appendAMPM,
+        civilianHours
+    )(clockTime)
 
-// Prepend 0 on the minutes to make double digits 
-if (time.hours < 10) {
-    time.hours = "0" + time.hours ;
-}
+const doubleDigits = civilianTime =>
+    compose(
+        prependZero("hours"),
+        prependZero("minutes"),
+        prependZero("seconds")
+    )(civilianTime)
 
-// prepend 0 to seconds to make  double digits 
- return time.hours + ":"
- +time.minutes + ":"
- +time.seconds + " "
- +time.ampm;
+const startTicking = () =>
+    setInterval(
+        compose(
+            clear,
+            getCurrentTime,
+            abstractClockTime,
+            convertToCivilianTime,
+            doubleDigits,
+            formatClock("hh:mm:ss tt"),
+            display(log)
+        ),
+        oneSecond()
+    )
 
-
-
-
-
-}
-  
-
-
-
-
+startTicking()
 
     
     </script>
