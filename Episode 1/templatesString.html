@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
-    <meta charset="utf-8">
-    <title>Composition</title>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="utf-8">
+  <title>Imperative Clock</title>
 </head>
 <body>
-  <h1>Composition</h1>
-  <p>Open the Console</p>
-<script type="text/babel">
-    const createClockTime = date => ({date})
-    const appendAMPM = ({date}) =>
-      ({
-          date,
-          ampm: (date.getHours() >= 12) ? "PM" : "AM"
-      })
-    const civilianHours = clockTime => {
-    const hours = clockTime.date.getHours()
-      return {
-        ...clockTime,
-        hours: (hours > 12) ?
-          hours - 12 :
-          hours
-      }
-    }
-    const removeDate = clockTime => {
-      let newTime = {...clockTime}
-      delete newTime.date
-      return newTime
-    }
-    // A more elegant approach to composition
-    const compose = (...fns) =>
-      (arg) =>
-      fns.reduce(
-        (composed, f) => f(composed),
-        arg
-    )
-    const oneFunction = compose(
-      createClockTime,
-      appendAMPM,
-      civilianHours,
-      removeDate
-    )
-    console.log(oneFunction(new Date()))
-</script>
+    <h1>Imperative Clock</h1>
+    <p>Open the console to check the time.</p>
+    <script>
+        // Lock clcok tie every second 
+
+        setInterval(logClockTime, 100);
+
+
+        function logClockTime () {
+
+//  Set time as civilian time  
+var time = getClockTime();
+
+// clear the console and log the time in the conosle 
+console.clear();
+console.log(time);
+}
+function getClockTime() {
+
+var date = new Date();
+var time= "";
+
+// Searilie clock time 
+var time = {
+    hours : date.getHours(),
+    minutes:date.getMinutes(),
+    seconds:date.getSeconds(),
+    ampm: "AM"
+}
+
+// Convert to civilian time  
+if (time.hours=12) {
+    time.ampm = "PM";
+}else if(time.hours >12){
+    time.ampm ="PM";
+    time.hours -=12;
+
+}
+
+// Prepend 0 on the minutes to make double digits 
+if (time.hours < 10) {
+    time.hours = "0" + time.hours ;
+}
+
+// prepend 0 to seconds to make  double digits 
+ return time.hours + ":"
+ +time.minutes + ":"
+ +time.seconds + " "
+ +time.ampm;
+
+
+
+
+
+}
+  
+
+
+
+
+
+    
+    </script>
 </body>
 </html>
