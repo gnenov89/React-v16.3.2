@@ -15,8 +15,24 @@
 <script src="https://unpkg.com/react-dom-factories@1.0.2/index.js"></script>
 
 <script>
-    const el = ReactDOMFactories.h1(null, "Baked Salmon")
-    ReactDOM.render(el, document.getElementById('react-container'))
+    var items = [
+      "1 lb salmon",
+      "1 cup Pine Nuts",
+      "2 cups Butter Lettuce",
+      "1 Yellow Squash",
+      "1/2 cup Olive Oil",
+      "3 cloves of Garlic"
+    ]
+    var list = ReactDOMFactories.ul(
+        { className: "ingredients" },
+        items.map((ingredient, key) =>
+            ReactDOMFactories.li({key}, ingredient)
+        )
+    )
+    ReactDOM.render(
+        list,
+        document.getElementById('react-container')
+    )
 </script>
 
 </body>
