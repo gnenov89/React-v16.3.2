@@ -1,8 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import { render } from 'react-dom'
+import Menu from './components/Menu'
+import data from '../data/recipes'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+window.React = React
+
+render(
+    <Menu recipes={data} />,
+    document.getElementById("react-container")
+)
