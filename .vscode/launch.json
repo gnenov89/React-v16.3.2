@@ -7,6 +7,21 @@
         {
             "type": "node",
             "request": "attach",
+            "name": "legacy",
+            "port": 9229
+        },
+        {
+            "name": "Debug iOS",
+            "program": "${workspaceRoot}/.vscode/launchReactNative.js",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "ios",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/.vscode/.react"
+        },
+        {
+            "type": "node",
+            "request": "attach",
             "name": "Attach",
             "port": 9229
         },
