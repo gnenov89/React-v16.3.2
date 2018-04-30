@@ -6,21 +6,27 @@
 </head>
 <body>
 <div id="react-container"></div>
+<form>
+    <input id="target" type="text" value="Field 1">
+    <input type="text" value="Field 2">
+  </form>
+  <div id="other">
+    Trigger the handler
+  </div>
 
 <script src="https://unpkg.com/prop-types/prop-types.js"></script>
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
 
 <script type="text/babel">
-   console.log(this === window); // true
-
-a = 37;
-console.log(window.a); // 37
-
-this.b = "MDN";
-console.log(window.b)  // "MDN"
-console.log(b)         // "MDN"
+ $( "#target" ).focus(function() {
+  alert( "Handler for .focus() called." );
+});
 </script>
 
 </body>
