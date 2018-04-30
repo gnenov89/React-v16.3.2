@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>01 - The Star Component</title>
+    <title>03 - setting state from props</title>
 </head>
 <body>
 <div id="react-container"></div>
@@ -13,19 +13,54 @@
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 
 <script type="text/babel">
+    const { Component } = React
     const { render } = ReactDOM
     const Star = ({ selected=false, onClick=f=>f }) =>
-      <div className={(selected) ? "star selected" : "star"}
-           f={}>
-      </div>
+        <div className={(selected) ? "star selected" : "star"}
+             onClick={onClick}>
+        </div>
     Star.propTypes = {
-      selected: PropTypes.bool,
-      f: PropTypes.func
+        selected: PropTypes.bool,
+        onClick: PropTypes.func
+    }
+    class StarRating extends Component {
+        static propTypes = {
+            totalStars: PropTypes.number
+        }
+        static defaultProps = {
+            totalStars: 5
+        }
+        constructor(props) {
+            super(props)
+            this.state = {
+                starsSelected: props.starsSelected || 0
+            }
+            this.change = this.change.bind(this)
+        }
+        change(starsSelected) {
+            this.setState({starsSelected})
+        }
+        render() {
+            const {totalStars} = this.props
+            const {starsSelected} = this.state
+            return (
+                <div className="star-rating">
+                    {[...Array(totalStars)].map((n, i) =>
+                        <Star key={i}
+                              selected={i<starsSelected}
+                              onClick={() => this.change(i+1)}
+                        />
+                    )}
+                    <p>{starsSelected} of {totalStars} stars</p>
+                </div>
+            )
+        }
     }
     render(
-      <Star selected={true} f={() => console.log('Star Click')} />,
-      document.getElementById('react-container')
+        <StarRating totalStars={7} starsSelected={3} />,
+        document.getElementById('react-container')
     )
+
 </script>
 
 </body>
