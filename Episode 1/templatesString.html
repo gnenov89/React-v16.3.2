@@ -1,67 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
-    <title>03 - setting state from props</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <title>Mounting Lifecycle</title>
 </head>
 <body>
 <div id="react-container"></div>
-<link rel="stylesheet" type="text/css" href="styles.css" />
-<script src="https://unpkg.com/prop-types/prop-types.js"></script>
-<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
-<script type="text/babel">
-    const { Component } = React
-    const { render } = ReactDOM
-    const Star = ({ selected=false, onClick=f=>f }) =>
-        <div className={(selected) ? "star selected" : "star"}
-             onClick={onClick}>
-        </div>
-    Star.propTypes = {
-        selected: PropTypes.bool,
-        onClick: PropTypes.func
-    }
-    class StarRating extends Component {
-        static propTypes = {
-            totalStars: PropTypes.number
-        }
-        static defaultProps = {
-            totalStars: 5
-        }
-        constructor(props) {
-            super(props)
-            this.state = {
-                starsSelected: props.starsSelected || 0
-            }
-            this.change = this.change.bind(this)
-        }
-        change(starsSelected) {
-            this.setState({starsSelected})
-        }
-        render() {
-            const {totalStars} = this.props
-            const {starsSelected} = this.state
-            return (
-                <div className="star-rating">
-                    {[...Array(totalStars)].map((n, i) =>
-                        <Star key={i}
-                              selected={i<starsSelected}
-                              onClick={() => this.change(i+1)}
-                        />
-                    )}
-                    <p>{starsSelected} of {totalStars} stars</p>
-                </div>
-            )
-        }
-    }
-    render(
-        <StarRating totalStars={7} starsSelected={3} />,
-        document.getElementById('react-container')
+  <script type="text/babel">
+  
+    const getFakeMembers = count => new Promise((resolves, rejects) => {
+      const api = `https://api.randomuser.me/?nat=US&results=${count}`
+      const request = new XMLHttpRequest()
+      request.open('GET', api)
+      request.onload = () => (request.status == 200) ?
+        resolves(JSON.parse(request.response).results) :
+        reject(Error(request.statusText))
+      request.onerror = (err) => rejects(err)
+      request.send()
+    })
+    getFakeMembers(3).then(
+    members => console.log(
+      members.map(m=>m.name.first).join(',')
     )
-
-</script>
-
+  )
+  </script>
 </body>
 </html>
